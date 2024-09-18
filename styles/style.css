@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=SUSE:wght@100..800&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=SUSE:wght@100..800&display=swap');
 /* Root variables */
 :root {
   /* background: rgb(43, 38, 49); */
@@ -44,11 +43,13 @@ h6 {
   /* mask de text? */
 }
 
+color{
+  color: #7e94fb;
+}
 h1 {
   padding-right: 1rem;
   font-size: clamp(1rem, 4vw, 2rem);
 }
-
 /* testing */
 header {
   z-index: 10;
@@ -57,7 +58,7 @@ header {
   left: 0;
 }
 
-header a {
+header a{
   display: flex;
   align-items: flex-end;
   text-decoration: none;
@@ -65,50 +66,50 @@ header a {
 }
 
 header div {
-  margin: 0.5rem 0 0 0.75rem;
+  margin:0.5rem 0 0 0.75rem;
   height: clamp(3rem, 6.5vw, 4rem);
   width: clamp(3rem, 6.5vw, 4rem);
-  mask-image: url("../assets//hummingbird-svgrepo-com.svg");
-  background-image: linear-gradient(90deg,
-      rgba(var(--accent)) 0%,
-      rgba(var(--primary)) 100%);
+  mask-image: url('../assets//hummingbird-svgrepo-com.svg');
+  background-image: linear-gradient(
+    90deg,
+    rgba(var(--accent)) 0%,
+    rgba(var(--primary)) 100%
+  );
   background-size: 200px 1px;
 }
 
-header:hover div {
+header:hover div{
   background-position: -100px;
 }
 
-header h1 {
-  background-image: rgba(var(--primary));
+header h1{
+  background-image: rgba(var(--primary))
 }
 
-header:hover a {
+header:hover a{
   /* background-color: red; */
+  
 }
 
 header h1 {
   z-index: 50;
 }
-
 main {
   background: rgba(var(--bg), 1);
   /* overflow: hidden; */
 }
-
 section {
-  display: grid;
-  height: 100vh;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  gap: 1.25rem;
   margin: 0 auto;
   max-width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  height: 100vh;
   background: rgba(var(--bg), 1);
-  background: purple;
-  padding: 1.25rem 0;
-}
+  padding: 1.25rem;
+  gap: 0.125rem;
 
+}
 
 div {
   display: grid;
@@ -118,50 +119,64 @@ div {
 
 div figure {
   z-index: 2;
+  border-radius: .375rem;
   background: rgba(var(--secondary));
 }
 
-img {
+img{
   padding: 0;
+  border-radius: .375rem;
 }
 
-img:hover {
+img:hover{
   padding: 0.375rem;
 }
 
 section div:nth-child(1) {
-  flex-direction: row;
-  grid-column: span 4 / span 4;
-  grid-column-end: 6;
-  grid-row-start: 1;
+  opacity: 0;
+  grid-column: span 4;
+  grid-column-end: 12;
+  grid-row: span 2;
+  grid-row-end: 3;
   display: flex;
-  grid-row: span 2 / span 2;
+  flex-direction: column-reverse;
+  width: fit-content;
+  place-content: center;
+  transform: translateY(100px);
+  animation: fade-in 500ms forwards;
 }
 
-section div:nth-child(2) {
-  flex-direction: row-reverse;
-  grid-column: span 4 / span 4;
-  grid-row: span 2 / span 2;
-  grid-row-end: 5;
-  display: flex;
+div h2 {
+  z-index: 1;
+  opacity: 0;
+  transition: ease 300ms;
 }
 
 section div:nth-child(1) h2 {
-  transform: rotate(-90deg);
+  opacity: 1;
+  transform: translateY(-100px);
 }
-
-section div:nth-child(1) figure {
-  border-radius: .375rem 0 0 .375rem;
-}
-
 section div:nth-child(2) h2 {
-  transform: rotate(90deg);
+  opacity: 1;
+  transform: translateY(100px);
 }
 
-section div:nth-child(2) figure {
-  border-radius: 0 .375rem .375rem 0;
+section div:nth-child(1):hover h2,
+section div:nth-child(2):hover h2 {
+  transform: translateY(0);
 }
 
+section div:nth-child(2) {
+  opacity: 0;
+  transform: translateY(100px);
+  animation: fade-in 500ms 200ms forwards;
+  grid-column: span 4;
+  grid-column-end: 6;
+  grid-row: span 2;
+  grid-row-end: 4;
+  width: fit-content;
+  
+}
 figure {
   height: 100%;
   overflow: hidden;
@@ -173,128 +188,70 @@ img {
   object-fit: cover;
 }
 
-
-/* medium screen */
-/* ! let op deze overwriten ook items op de large screen */
-@media screen and (min-width: 720px) {
-
-  section div:nth-child(1) figure,
-  section div:nth-child(1) img,
-  section div:nth-child(2) figure,
-  section div:nth-child(2) img {
-    border-radius: .375rem;
-  }
-
+/* deze omzetten naar min-width */
+@media screen and (max-width: 1000px) {
   section {
+    background: green;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    background: orange;
-    padding: 1.25rem;
   }
-
-  section div {
-    display: flex;
-  }
-
-  section div:nth-child(1) {
-    flex-direction: column-reverse;
-  }
-
-  section div:nth-child(1) h2 {
-    transform: translateY(-100px) rotate(0);
-  }
-
-  section div:nth-child(2) {
-    flex-direction: column;
-  }
-
-  section div:nth-child(2) h2 {
-    transform: translateY(100px) rotate(0);
-  }
-
-  section div:nth-child(1):hover h2,
-  section div:nth-child(2):hover h2 {
-    transform: translateY(0);
-  }
-
   section div:nth-child(1) {
     grid-row: span 2 / span 2;
     grid-row-start: 1;
     grid-column: span 3 / span 3;
     grid-column-end: 8;
   }
-
   section div:nth-child(2) {
     grid-row: span 2 / span 2;
     grid-row-start: 2;
     grid-column: span 3 / span 3;
     grid-column-end: 4;
   }
-
-  div h2 {
-    z-index: 1;
-    opacity: 0;
-    transition: ease 300ms;
-  }
-
-  div:hover h2 {
-    opacity: 1;
-  }
 }
-
-/* large screen */
-@media screen and (min-width: 1000px) {
+/* en deze ook! */
+@media screen and (max-width: 720px) {
   section {
-    grid-template-columns: repeat(12, 1fr);
+    background: purple;
+    grid-template-columns: repeat(5, 1fr);
+    /* change to 4 rows and add gap? */
+    grid-template-rows: repeat(4, 1fr);
+    gap: 1.25rem;
   }
 
   section div:nth-child(1) {
-    opacity: 0;
-    transform: translateY(100px);
-    grid-column: span 4;
-    grid-column-end: 12;
-    grid-row: span 2;
-    grid-row-end: 3;
-    width: fit-content;
-    place-content: center;
-    animation: fade-in 500ms 100ms forwards;
-  }
-
-  section div:nth-child(1) h2 {
-    transform: translateY(-100px);
-    opacity: 1;
-  }
-
-  section div:nth-child(2) h2 {
-    opacity: 1;
-    transform: translateY(100px);
+    flex-direction: row;
+    grid-column: span 4 / span 4;
+    grid-column-end: 6;
+    grid-row-start: 1;
+    /* grid-row: span 2 / span 2; */
   }
 
   section div:nth-child(2) {
-    opacity: 0;
-    transform: translateY(100px);
-    grid-column: span 4;
-    grid-column-end: 6;
-    grid-row: span 2;
-    grid-row-end: 4;
-    width: fit-content;
-    animation: fade-in 500ms 300ms forwards;
+    flex-direction: row-reverse;
+    grid-column: span 4 / span 4;
+    grid-row: span 2 / span 2;
+    grid-row-end: 5;
+    display: flex;
+  }
+  section div:nth-child(1) h2 {
+    transform: rotate(-90deg);
+  }
+
+  section div:nth-child(2) h2 {
+    transform: rotate(-90deg);
   }
 }
 
 /*scrollbar styling*/
 ::-webkit-scrollbar {
   width: 10px;
-  background: rgb(0, 0, 0);
+  background: rgb(43, 38, 49);
 }
-
 ::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px grey;
   border-radius: 10px;
 }
-
 ::-webkit-scrollbar-thumb {
-  background: rgb(255, 255, 255);
+  background: rgba(0, 8, 255, 0.393);
   border-radius: 10px;
 }
 
@@ -302,7 +259,6 @@ img {
   from {
     opacity: 0;
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
